@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>a571c0d144b14fd4a87a9d9b2aa9fcd6</uuid>
+            <name>Templates/Applications</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>977a78a30d8844f3a4a653c508fd28be</uuid>
+            <template>Devline Line Linux</template>
+            <name>Devline Line Linux</name>
+            <groups>
+                <group>
+                    <name>Templates/Applications</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>b40b805602d54d7cb574857aab731f57</uuid>
+                    <name>Line service status</name>
+                    <key>line.service</key>
+                    <delay>30s</delay>
+                    <preprocessing>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>1</parameter>
+                                <parameter>Up</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>0</parameter>
+                                <parameter>Down</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <uuid>2617164e61d249c3beb93a0f1e8ee12d</uuid>
+                            <expression>last(/Devline Line Linux/line.service,#3)=0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/Devline Line Linux/line.service,#3)=1</recovery_expression>
+                            <name>Line service</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>c62b3854e9d7436ea7c9b12f8b933303</uuid>
+                    <name>Line share status</name>
+                    <key>line.share</key>
+                    <delay>30s</delay>
+                    <preprocessing>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>1</parameter>
+                                <parameter>Up</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>STR_REPLACE</type>
+                            <parameters>
+                                <parameter>0</parameter>
+                                <parameter>Down</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <uuid>04239b1117a9414eab27abb6dcea5902</uuid>
+                            <expression>last(/Devline Line Linux/line.share,#3)=0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/Devline Line Linux/line.share,#3)=1</recovery_expression>
+                            <name>Line share</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <valuemaps>
+                <valuemap>
+                    <uuid>b9574be700134d25b72143ea4b3bfde1</uuid>
+                    <name>Status</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Up</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Down</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>aed1ea17e8ac48e191a09ddeb4eab4b7</uuid>
+            <name>Status</name>
+            <yaxismin>-1</yaxismin>
+            <yaxismax>2</yaxismax>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Devline Line Linux</host>
+                        <key>line.service</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>274482</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Devline Line Linux</host>
+                        <key>line.share</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
