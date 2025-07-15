@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>a571c0d144b14fd4a87a9d9b2aa9fcd6</uuid>
+            <name>Templates/Applications</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>eb4b2f7e5ec544188fc4aa935aa34a05</uuid>
+            <template>Devline Archive Windows</template>
+            <name>Devline Archive Windows</name>
+            <groups>
+                <group>
+                    <name>Templates/Applications</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>1f2d1f5198174b0487182cb72b5985ac</uuid>
+                    <name>Line archive</name>
+                    <key>line.archive</key>
+                    <units>day</units>
+                    <triggers>
+                        <trigger>
+                            <uuid>1f642161a05c45cbafdaa7e9f06668cf</uuid>
+                            <expression>last(/Devline Archive Windows/line.archive,#3)&lt;30</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/Devline Archive Windows/line.archive,#3)&gt;=30</recovery_expression>
+                            <name>Archive &lt; 30 day</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>c233afd3397046039611a7722b0a3fc8</uuid>
+            <name>Archive</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>Devline Archive Windows</host>
+                        <key>line.archive</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
